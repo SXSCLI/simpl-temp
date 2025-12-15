@@ -1,0 +1,97 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simpl-temp"
+version = "1.0.0"
+description = "Professional Python library for temporary data management with API support"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Kozosvyst Stas (StasX)", email = "stasx@sxscli.com"}
+]
+maintainers = [
+    {name = "Kozosvyst Stas (StasX)", email = "stasx@sxscli.com"}
+]
+keywords = [
+    "temporary",
+    "cache",
+    "storage",
+    "ttl",
+    "temp",
+    "data",
+    "api",
+    "fastapi"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Filesystems",
+    "Typing :: Typed"
+]
+requires-python = ">=3.8"
+dependencies = []
+
+[project.optional-dependencies]
+api = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "pydantic>=2.0.0"
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "flake8>=6.0.0"
+]
+all = [
+    "simpl-temp[api,dev]"
+]
+
+[project.urls]
+Homepage = "https://github.com/StasX/simpl-temp"
+Documentation = "https://github.com/StasX/simpl-temp#readme"
+Repository = "https://github.com/StasX/simpl-temp.git"
+Issues = "https://github.com/StasX/simpl-temp/issues"
+
+[project.scripts]
+simpl-temp-api = "simpl_temp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["simpl_temp*"]
+
+[tool.setuptools.package-data]
+simpl_temp = ["py.typed"]
+
+[tool.black]
+line-length = 88
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=simpl_temp --cov-report=html"
